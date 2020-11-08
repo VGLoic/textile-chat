@@ -1,0 +1,34 @@
+{
+  "name": "textile-chat-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start:client": "yarn workspace client start",
+    "test:client": "yarn workspace client test",
+    "test:client:cover": "yarn workspace client test:cover",
+    "start:all": "npm-run-all --parallel start:client start:lambda",
+    "build:client": "yarn workspace client build",
+    "start:lambda": "yarn workspace lambda start",
+    "test:lambda": "yarn workspace lambda test",
+    "test:lambda:cover": "yarn workspace lambda test:cover",
+    "test:cover": "npm-run-all --parallel test:client:cover test:lambda:cover",
+    "build:lambda": "yarn workspace lambda build",
+    "build:all": "yarn install && npm-run-all --parallel build:client build:lambda",
+    "precommit:client": "yarn workspace client precommit",
+    "precommit:lambda": "yarn workspace lambda precommit",
+    "precommit:all": "npm-run-all precommit:client precommit:lambda"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "npm-run-all": "^4.1.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit:all"
+    }
+  }
+}

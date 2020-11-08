@@ -1,0 +1,8 @@
+.HubViewer-container {
+    flex: 1;
+    display: flex;
+    /* align-items: center; */
+    /* border: 2px solid white; */
+    padding: 0 25px;
+    width: 80%;
+}

@@ -1,0 +1,15 @@
+.MessagesBox-container {
+    padding: 0 20px;
+    flex: 2;
+}
+
+
+.MessagesBox-messages-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: .6em;
+    overflow-y: auto;
+    height: 240px;
+}

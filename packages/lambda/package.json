@@ -1,0 +1,36 @@
+{
+  "name": "lambda",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "netlify-lambda serve src/ --config webpack.functions.js",
+    "test": "NODE_ENV=test jest src --watch",
+    "test:cover": "NODE_ENV=test jest src --coverage",
+    "build": "netlify-lambda build src/ --config webpack.functions.js",
+    "prettier": "prettier --write src/",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "@textile/hub": "^1.1.1",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-object-assign": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@types/aws-lambda": "^8.10.64",
+    "babel-loader": "^8.1.0",
+    "lint-staged": ">=10",
+    "netlify-lambda": "^2.0.1",
+    "prettier": "2.0.1",
+    "typescript": "^3.7.2",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "lint-staged": {
+    "*.{ts,js,css,md}": "prettier --write"
+  },
+  "prettier": {
+    "useTabs": false,
+    "tabWidth": 2
+  }
+}
