@@ -4,6 +4,7 @@ import { PrivateKey } from "@textile/hub";
 import MessageBucketClient, { Index } from "../hubClient";
 // Hooks
 import useAsync from "../useAsync";
+import { useMetamaskIdentity } from "../useMetamasIdentity";
 // Components
 import MessagesBox from "../MessagesBox";
 import MessageInput from "../MessageInput";
@@ -15,14 +16,14 @@ async function setup(identity: PrivateKey): Promise<Index> {
     return index;
 }
 
-interface UseHubSynchronisationArgs {
-    identity: PrivateKey;
-}
-function useHubSynchronisation({ identity }: UseHubSynchronisationArgs) {
+function useHubSynchronisation() {
+    const { data: identity } = useMetamaskIdentity();
     const { run, data, status, setData } = useAsync({ status: "pending" });
 
     React.useEffect(() => {
-        run(setup(identity));
+        if (identity) {
+            run(setup(identity));
+        }
     }, [run, identity]);
 
     const addPathToIndex = (path: string) => {
@@ -42,12 +43,9 @@ function useHubSynchronisation({ identity }: UseHubSynchronisationArgs) {
     }
 }
 
-interface HubViewerProps {
-    identity: PrivateKey
-}
-export default function HubViewer({ identity }: HubViewerProps) {
+export default function HubViewer() {
 
-    const { index, status, addPathToIndex } = useHubSynchronisation({ identity });
+    const { index, status, addPathToIndex } = useHubSynchronisation();
 
     if (status === "pending") {
         return (
